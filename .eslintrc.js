@@ -23,16 +23,21 @@ module.exports = {
 			jsx: true
 		}
 	},
-	plugins: ["react", "@typescript-eslint", "react-hooks", "prettier"],
+	plugins: [
+		"react",
+		"@typescript-eslint",
+		"react-hooks"
+		// "prettier"
+	],
 	/* 继承某些已有的规则 */
 	extends: [
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:react/jsx-runtime",
-		"plugin:react-hooks/recommended",
-		"prettier",
-		"plugin:prettier/recommended"
+		"plugin:react-hooks/recommended"
+		// "prettier",
+		// "plugin:prettier/recommended"
 	],
 	/*
 	 * "off" 或 0    ==>  关闭规则
@@ -41,7 +46,7 @@ module.exports = {
 	 */
 	rules: {
 		// eslint (http://eslint.cn/docs/rules)
-		"no-var": "error", // 要求使用 let 或 const 而不是 var
+		"no-var": 1, // 要求使用 let 或 const 而不是 var
 		"no-multiple-empty-lines": ["error", { max: 1 }], // 不允许多个空行
 		"no-use-before-define": "off", // 禁止在 函数/类/变量 定义之前使用它们
 		"prefer-const": "off", // 此规则旨在标记使用 let 关键字声明但在初始分配后从未重新分配的变量，要求使用 const
@@ -66,4 +71,13 @@ module.exports = {
 		"react-hooks/rules-of-hooks": "off",
 		"react-hooks/exhaustive-deps": "off"
 	}
+
+	// 	"overrides": [
+	//     {
+	//       "files": ["src/language/index.js"],
+	//       "rules": {
+	//         "prettier/prettier": "off"
+	//       }
+	//     }
+	//   ]
 };
