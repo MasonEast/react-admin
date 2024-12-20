@@ -33,25 +33,24 @@ export default function Customer() {
 	}, [params]);
 
 	const handleSearch = async () => {
-		const { title, applyNum, state } = params;
-		const { data }: any = await getPatents();
-
+		// const { title, applyNum, state } = params;
+		const { data }: any = await getPatents({ select: params.select });
 		// if (data.length > 0 && (title || applyNum || state)) {
-		const v = data.filter((item: any) => {
-			if (title) {
-				return item.title.includes(title);
-			}
-			if (applyNum) {
-				return item.applyNum.includes(applyNum);
-			}
-			if (state) {
-				return item.state.includes(state);
-			}
+		// const v = data.filter((item: any) => {
+		// 	if (title) {
+		// 		return item.title.includes(title);
+		// 	}
+		// 	if (applyNum) {
+		// 		return item.applyNum.includes(applyNum);
+		// 	}
+		// 	if (state) {
+		// 		return item.state.includes(state);
+		// 	}
 
-			return item;
-		});
-		setList(v);
-		setTotal(v.length);
+		// 	return item;
+		// });
+		setList(data);
+		setTotal(data.length);
 		// return;
 		// }
 	};

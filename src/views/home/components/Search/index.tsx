@@ -19,15 +19,15 @@ const Search = ({ setParams }: Props) => {
 	return (
 		<Card style={{ marginBottom: 24 }}>
 			<Form name="basic" onFinish={onFinish} layout="inline" form={form}>
-				<Form.Item label="标题" name="title">
+				<Form.Item label="关键字" name="select">
 					<Input style={{ width: 250 }} />
 				</Form.Item>
-				<Form.Item label="申请号" name="applyNum">
+				{/* <Form.Item label="申请号" name="applyNum">
 					<Input style={{ width: 250 }} />
 				</Form.Item>
 				<Form.Item label="法律状态/事件" name="state">
 					<Input style={{ width: 250 }} />
-				</Form.Item>
+				</Form.Item> */}
 				{/* <Form.Item label="客户类别" name="customerType">
 					<Select style={{ width: 250 }}>
 						<Option value={1}>已合作</Option>

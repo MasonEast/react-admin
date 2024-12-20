@@ -25,8 +25,8 @@ export const getMenuList = () => {
 	return http.get<Menu.MenuOptions[]>(PORT1 + `/menu/list`);
 };
 
-export const getPatents = () => {
-	return http.get<any[]>(PORT1 + `/patentDO/getPatents`);
+export const getPatents = (params: any) => {
+	return http.get<any[]>(PORT1 + `/patentDO/getPatents`, params);
 };
 
 export const addPatents = (p: any) => {
@@ -39,4 +39,8 @@ export const updatePatents = (p: any) => {
 
 export const deletePatents = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/patentDO/delete`, p);
+};
+
+export const uploadPatents = (p: any) => {
+	return http.post<any[]>(PORT1 + `/patentDO/uploadPatentFile`, p);
 };
