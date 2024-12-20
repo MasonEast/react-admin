@@ -5,7 +5,7 @@ import { findAllBreadcrumb, getOpenKeys, handleRouter, searchRoute } from "@/uti
 import { setMenuList } from "@/redux/modules/menu/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
 import { setAuthRouter } from "@/redux/modules/auth/action";
-import { getMenuList } from "@/api/modules/login";
+// import { getMenuList } from "@/api/modules/login";
 import { connect } from "react-redux";
 import type { MenuProps } from "antd";
 import * as Icons from "@ant-design/icons";
@@ -72,7 +72,30 @@ const LayoutMenu = (props: any) => {
 	const getMenuData = async () => {
 		setLoading(true);
 		try {
-			const { data } = await getMenuList();
+			const data = [
+				{
+					icon: "HomeOutlined",
+					title: "首页",
+					path: "/home/index"
+				},
+				{
+					icon: "AreaChartOutlined",
+					title: "数据大屏",
+					path: "/dataScreen/index"
+				},
+				{
+					icon: "TableOutlined",
+					title: "超级表格",
+					path: "/proTable",
+					children: [
+						{
+							icon: "AppstoreOutlined",
+							path: "/proTable/useHooks",
+							title: "使用 Hooks"
+						}
+					]
+				}
+			];
 			if (!data) return;
 			setMenuList(deepLoopFloat(data));
 			// 存储处理过后的所有面包屑导航栏到 redux 中

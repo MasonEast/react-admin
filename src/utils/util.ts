@@ -1,5 +1,19 @@
 import { RouteObject } from "@/routers/interface";
 
+import dayjs from "dayjs";
+
+export function isWithin30Days(date: string) {
+	// 将 date 转换为 dayjs 对象
+	const endDate = dayjs(date);
+
+	// 获取当前日期的 dayjs 对象
+	const currentDate = dayjs();
+
+	// 如果 date 是将来的日期，那么 endDate.diff(currentDate, 'day') 会大于 0
+	// 并且我们要检查是否小于等于 30天
+	return endDate.diff(currentDate, "day") <= 30;
+}
+
 /**
  * @description 获取localStorage
  * @param {String} key Storage名称

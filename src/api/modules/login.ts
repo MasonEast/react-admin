@@ -24,3 +24,19 @@ export const getAuthorButtons = () => {
 export const getMenuList = () => {
 	return http.get<Menu.MenuOptions[]>(PORT1 + `/menu/list`);
 };
+
+export const getPatents = () => {
+	return http.get<any[]>(PORT1 + `/patentDO/getPatents`);
+};
+
+export const addPatents = (p: any) => {
+	return http.post<any[]>(PORT1 + `/patentDO/add`, p);
+};
+
+export const updatePatents = (p: any) => {
+	return http.post<any[]>(PORT1 + `/patentDO/edit`, p);
+};
+
+export const deletePatents = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/patentDO/delete`, {}, { p });
+};
