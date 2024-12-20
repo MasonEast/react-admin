@@ -75,26 +75,26 @@ const LayoutMenu = (props: any) => {
 			const data = [
 				{
 					icon: "HomeOutlined",
-					title: "首页",
+					title: "专利",
 					path: "/home/index"
-				},
-				{
-					icon: "AreaChartOutlined",
-					title: "数据大屏",
-					path: "/dataScreen/index"
-				},
-				{
-					icon: "TableOutlined",
-					title: "超级表格",
-					path: "/proTable",
-					children: [
-						{
-							icon: "AppstoreOutlined",
-							path: "/proTable/useHooks",
-							title: "使用 Hooks"
-						}
-					]
 				}
+				// {
+				// 	icon: "AreaChartOutlined",
+				// 	title: "数据大屏",
+				// 	path: "/dataScreen/index"
+				// },
+				// {
+				// 	icon: "TableOutlined",
+				// 	title: "超级表格",
+				// 	path: "/proTable",
+				// 	children: [
+				// 		{
+				// 			icon: "AppstoreOutlined",
+				// 			path: "/proTable/useHooks",
+				// 			title: "使用 Hooks"
+				// 		}
+				// 	]
+				// }
 			];
 			if (!data) return;
 			setMenuList(deepLoopFloat(data));

@@ -39,13 +39,13 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 		setSelectRecord(record);
 	};
 
-	const handleDelete = (record: any) => {
+	const handleDelete = async (record: any) => {
 		console.log(record);
-		deletePatents({ customerId: record.customerId });
+		await deletePatents({ ids: record.id });
+		handleSearch();
 	};
 
 	const columns: ColumnProps<any>[] = [
-		// { dataIndex: "customerId", title: "客户id" },
 		{ dataIndex: "title", title: "标题" },
 		{
 			dataIndex: "annualFeeEndDate",
@@ -58,6 +58,10 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 		{ dataIndex: "applyDate", title: "申请日期" },
 		{ dataIndex: "openDate", title: "公开日期" },
 		{ dataIndex: "type", title: "专利类型" },
+
+		{ dataIndex: "annualFee", title: "年费" },
+
+		{ dataIndex: "endDate", title: "专利终止日期" },
 		// {
 		// 	dataIndex: "customerType",
 		// 	title: "客户类别",
@@ -78,10 +82,6 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 		// 		}
 		// 	}
 		// },
-		{ dataIndex: "annualFee", title: "年费" },
-
-		{ dataIndex: "endDate", title: "专利终止日期" },
-
 		{
 			dataIndex: "operate",
 			title: "操作",

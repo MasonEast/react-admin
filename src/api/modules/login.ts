@@ -34,9 +34,9 @@ export const addPatents = (p: any) => {
 };
 
 export const updatePatents = (p: any) => {
-	return http.post<any[]>(PORT1 + `/patentDO/edit`, p);
+	return http.put<any[]>(PORT1 + `/patentDO/edit`, p);
 };
 
 export const deletePatents = (p: any) => {
-	return http.delete<any[]>(PORT1 + `/patentDO/delete`, {}, { p });
+	return http.delete<any[]>(PORT1 + `/patentDO/delete`, p);
 };

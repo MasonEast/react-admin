@@ -13,51 +13,46 @@ export default function Customer() {
 	const [total, setTotal] = useState(0);
 
 	const [list, setList] = useState<any>([]);
-	const [allData, setAllData] = useState<any>([]);
+	// const [allData, setAllData] = useState<any>([]);
 
-	const getList = async () => {
-		const { data } = await getPatents();
-		if (Array.isArray(data)) {
-			setList(data || []);
-			setAllData(data || []);
-			setTotal(data.length);
-		}
-	};
+	// const getList = async () => {
+	// 	const { data } = await getPatents();
+	// 	if (Array.isArray(data)) {
+	// 		setList(data || []);
+	// 		// setAllData(data || []);
+	// 		setTotal(data.length);
+	// 	}
+	// };
 
-	useEffect(() => {
-		getList();
-	}, []);
+	// useEffect(() => {
+	// 	getList();
+	// }, []);
 
 	useEffect(() => {
 		handleSearch();
 	}, [params]);
 
 	const handleSearch = async () => {
-		if (allData.length > 0) {
-			console.log("allData", allData, params);
-			const data = allData.filter((item: any) => {
-				const { title, applyNum, state } = params;
+		const { title, applyNum, state } = params;
+		const { data }: any = await getPatents();
 
-				if (title) {
-					return item.title.includes(title);
-				}
-				if (applyNum) {
-					return item.applyNum.includes(applyNum);
-				}
-				if (state) {
-					return item.state.includes(state);
-				}
+		// if (data.length > 0 && (title || applyNum || state)) {
+		const v = data.filter((item: any) => {
+			if (title) {
+				return item.title.includes(title);
+			}
+			if (applyNum) {
+				return item.applyNum.includes(applyNum);
+			}
+			if (state) {
+				return item.state.includes(state);
+			}
 
-				return item;
-			});
-			setList(data);
-			setTotal(data.length);
-			return;
-		}
-		// const { data } = await getPatents();
-		// if (Array.isArray(data)) {
-		// 	setList(data || []);
-		// 	setTotal(data.length);
+			return item;
+		});
+		setList(v);
+		setTotal(v.length);
+		// return;
 		// }
 	};
 

@@ -1,37 +1,38 @@
-import { Modal, Form, Input, Row, Col, Select, message } from "antd";
+import { Modal, Form, Input, Row, Col, message, DatePicker } from "antd";
 import { useEffect } from "react";
 import { addPatents, updatePatents } from "@/api/modules/login";
-
-const { Option } = Select;
+import moment from "moment";
+// const { Option } = Select;
 
 export default function AddModal({ modalVisible, setModalVisible, handleSearch, record }: any) {
 	const [form] = Form.useForm();
 
-	// const { run: add } = useRequest(customerAdd, {
-	// 	manual: true,
-	// 	onSuccess: () => {
-	// 		message.success("操作成功");
-	// 		handleSearch();
-	// 	}
-	// });
-
-	// const { run: update } = useRequest(customerUpdate, {
-	// 	manual: true,
-	// 	onSuccess: () => {
-	// 		message.success("操作成功");
-	// 		handleSearch();
-	// 	}
-	// });
-
 	useEffect(() => {
-		if (modalVisible) {
-			form.setFieldsValue(record);
+		if (modalVisible && record) {
+			const { annualFeeEndDate, applyDate, openDate, endDate } = record;
+			form.setFieldsValue({
+				...record,
+				annualFeeEndDate: annualFeeEndDate ? moment(annualFeeEndDate, "YYYY-MM-DD") : "",
+				applyDate: applyDate ? moment(applyDate, "YYYY-MM-DD") : "",
+				openDate: openDate ? moment(openDate, "YYYY-MM-DD") : "",
+				endDate: endDate ? moment(endDate, "YYYY-MM-DD") : ""
+			});
 		}
 	}, [record, modalVisible]);
 
 	const handleOk = async () => {
 		const value = form.getFieldsValue();
-		!record ? await addPatents(value) : await updatePatents({ customerId: record.customerId, ...value });
+		console.log(value, "ddd");
+		!record
+			? await addPatents(value)
+			: await updatePatents({
+					...record,
+					...value,
+					annualFeeEndDate: value.annualFeeEndDate ? value.annualFeeEndDate.format("YYYY-MM-DD") : "",
+					applyDate: value.applyDate ? value.applyDate.format("YYYY-MM-DD") : "",
+					openDate: value.openDate ? value.openDate.format("YYYY-MM-DD") : "",
+					endDate: value.endDate ? value.endDate.format("YYYY-MM-DD") : ""
+			  });
 		setModalVisible(false);
 		form.resetFields();
 		await handleSearch();
@@ -44,81 +45,37 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	const fields = [
+		{ name: "title", label: "标题", element: <Input /> },
 		{
-			name: "customerName",
-			label: "客户名称",
-			element: <Input />
+			name: "annualFeeEndDate",
+			label: "年费截至日期",
+			element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} />
 		},
-		{
-			name: "address",
-			label: "详细地址",
-			element: <Input />
-		},
-		{
-			name: "contactPerson",
-			label: "联系人",
-			element: <Input />
-		},
-		{
-			name: "mobilePhone",
-			label: "手机号",
-			element: <Input />
-		},
-		{
-			name: "faxNumber",
-			label: "传真号码",
-			element: <Input />
-		},
-		{
-			name: "email",
-			label: "电子邮件",
-			element: <Input />
-		},
-		{
-			name: "customerType",
-			label: "客户类别",
-			element: (
-				<Select style={{ width: "100%" }}>
-					<Option value={1}>已合作</Option>
-					<Option value={2}>已签订合同</Option>
-					<Option value={3}>有合作意向</Option>
-					<Option value={4}>需要继续跟进</Option>
-					<Option value={5}>跟进难度较大</Option>
-					<Option value={6}>无意向</Option>
-				</Select>
-			)
-		},
-		{
-			name: "belongUserId",
-			label: "客户所属员工ID",
-			element: <Input />
-		},
-		{
-			name: "signPrice",
-			label: "签约费用",
-			element: <Input />
-		},
-		{
-			name: "mainItem",
-			label: "客户主营项目",
-			element: <Input />
-		},
-		{
-			name: "customerSource",
-			label: "客户来源",
-			element: <Input />
-		},
-		{
-			name: "signStatus",
-			label: "客户签约状态",
-			element: (
-				<Select style={{ width: "100%" }}>
-					<Option value={0}>未签约</Option>
-					<Option value={1}>签约中</Option>
-					<Option value={2}>报停</Option>
-				</Select>
-			)
-		}
+		{ name: "applyNum", label: "申请号", element: <Input /> },
+		{ name: "state", label: "法律状态/事件", element: <Input /> },
+		{ name: "applyUser", label: "申请人", element: <Input /> },
+		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "openDate", label: "公开日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "type", label: "专利类型", element: <Input /> },
+
+		{ name: "annualFee", label: "年费", element: <Input /> },
+
+		{ name: "endDate", label: "专利终止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> }
+
+		// {
+		// 	name: "customerType",
+		// 	label: "客户类别",
+		// 	element: (
+		// 		<Select style={{ width: "100%" }}>
+		// 			<Option value={1}>已合作</Option>
+		// 			<Option value={2}>已签订合同</Option>
+		// 			<Option value={3}>有合作意向</Option>
+		// 			<Option value={4}>需要继续跟进</Option>
+		// 			<Option value={5}>跟进难度较大</Option>
+		// 			<Option value={6}>无意向</Option>
+		// 		</Select>
+		// 	)
+		// }
 	];
 
 	const getFields = () => {
