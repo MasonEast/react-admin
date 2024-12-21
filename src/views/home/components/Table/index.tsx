@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deletePatents } from "@/api/modules/login";
 import AddModal from "../Modal";
 import { isWithin30Days } from "@/utils/util";
+import Upload from "@/components/Upload";
 
 import styles from "./index.module.less";
 
@@ -87,7 +88,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 			title: "操作",
 			fixed: "right",
 			key: "httpoperate",
-			width: "120px",
+			width: "160px",
 			render: (_, record) => {
 				return (
 					<>
@@ -97,6 +98,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 						<Popconfirm title={`你确定要删除吗？`} onConfirm={() => handleDelete(record)} okText="确定" cancelText="取消">
 							<span className="global_table_button">删除</span>
 						</Popconfirm>
+						<Upload uploadUrl="/patentDO/uploadPatentFile" id={record.id} showUploadList={false} />
 					</>
 				);
 			}

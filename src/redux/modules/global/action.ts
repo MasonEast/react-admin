@@ -4,7 +4,7 @@ import { ThemeConfigProp } from "@/redux/interface/index";
 // * setToken
 export const setToken = (token: string) => ({
 	type: types.SET_TOKEN,
-	token: token || "1111"
+	token: token
 });
 
 // * setAssemblySize
