@@ -94,7 +94,7 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	return (
-		<Modal title="新增/编辑客户" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} width={"80vw"}>
+		<Modal title="新增/编辑" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} width={"80vw"}>
 			<Form
 				form={form}
 				labelCol={{ span: 8 }}

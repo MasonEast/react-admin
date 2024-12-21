@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Row, Col, message, DatePicker } from "antd";
 import { useEffect } from "react";
-import { addPatents, updatePatents } from "@/api/modules/login";
+import { addTrademark, updateTrademark } from "@/api/modules/login";
 import moment from "moment";
 // const { Option } = Select;
 
@@ -9,13 +9,14 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 
 	useEffect(() => {
 		if (modalVisible && record) {
-			const { annualFeeEndDate, applyDate, openDate, endDate } = record;
+			const { announcementDate, applyDate, objectionExpiryDate, registDate, expiryDate } = record;
 			form.setFieldsValue({
 				...record,
-				annualFeeEndDate: annualFeeEndDate ? moment(annualFeeEndDate, "YYYY-MM-DD") : "",
+				announcementDate: announcementDate ? moment(announcementDate, "YYYY-MM-DD") : "",
 				applyDate: applyDate ? moment(applyDate, "YYYY-MM-DD") : "",
-				openDate: openDate ? moment(openDate, "YYYY-MM-DD") : "",
-				endDate: endDate ? moment(endDate, "YYYY-MM-DD") : ""
+				objectionExpiryDate: objectionExpiryDate ? moment(objectionExpiryDate, "YYYY-MM-DD") : "",
+				registDate: registDate ? moment(registDate, "YYYY-MM-DD") : "",
+				expiryDate: expiryDate ? moment(expiryDate, "YYYY-MM-DD") : ""
 			});
 		}
 	}, [record, modalVisible]);
@@ -24,14 +25,15 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 		const value = form.getFieldsValue();
 		console.log(value, "ddd");
 		!record
-			? await addPatents(value)
-			: await updatePatents({
+			? await addTrademark(value)
+			: await updateTrademark({
 					...record,
 					...value,
-					annualFeeEndDate: value.annualFeeEndDate ? value.annualFeeEndDate.format("YYYY-MM-DD") : "",
+					announcementDate: value.announcementDate ? value.announcementDate.format("YYYY-MM-DD") : "",
 					applyDate: value.applyDate ? value.applyDate.format("YYYY-MM-DD") : "",
-					openDate: value.openDate ? value.openDate.format("YYYY-MM-DD") : "",
-					endDate: value.endDate ? value.endDate.format("YYYY-MM-DD") : ""
+					objectionExpiryDate: value.objectionExpiryDate ? value.objectionExpiryDate.format("YYYY-MM-DD") : "",
+					registDate: value.registDate ? value.registDate.format("YYYY-MM-DD") : "",
+					expiryDate: value.expiryDate ? value.expiryDate.format("YYYY-MM-DD") : ""
 			  });
 		setModalVisible(false);
 		form.resetFields();
@@ -45,22 +47,28 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	const fields = [
-		{ name: "title", label: "标题", element: <Input /> },
+		{ name: "applyUser", label: "申请人", element: <Input /> },
+
+		{ name: "type", label: "类别", element: <Input /> },
+		{ name: "registNum", label: "注册号", element: <Input /> },
+		{ name: "status", label: "商标状态", element: <Input /> },
+		{ name: "name", label: "商标名称", element: <Input /> },
+		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "announcementDate", label: "初审公告日", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+
 		{
-			name: "annualFeeEndDate",
-			label: "年费截至日期",
+			name: "objectionExpiryDate",
+			label: "异议截止日",
 			element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} />
 		},
-		{ name: "applyNum", label: "申请号", element: <Input /> },
-		{ name: "state", label: "法律状态/事件", element: <Input /> },
-		{ name: "applyUser", label: "申请人", element: <Input /> },
-		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "openDate", label: "公开日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "type", label: "专利类型", element: <Input /> },
 
-		{ name: "annualFee", label: "年费", element: <Input /> },
+		{ name: "registDate", label: "注册日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "expiryDate", label: "截止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "thing", label: "核定商品/服务", element: <Input /> },
+		{ name: "thingGroup", label: "核定商品/服务组别", element: <Input /> },
+		{ name: "invalidThing", label: "无效商品/服务", element: <Input /> },
 
-		{ name: "endDate", label: "专利终止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> }
+		{ name: "oldApplyUser", label: "原申请人", element: <Input /> }
 
 		// {
 		// 	name: "customerType",
@@ -94,7 +102,7 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	return (
-		<Modal title="新增/编辑客户" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} width={"80vw"}>
+		<Modal title="新增/编辑" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} width={"80vw"}>
 			<Form
 				form={form}
 				labelCol={{ span: 8 }}

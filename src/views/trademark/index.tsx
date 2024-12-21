@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPatents } from "@/api/modules/login";
+import { getTrademark } from "@/api/modules/login";
 
 import Search from "./components/Search";
 import Table from "./components/Table";
@@ -16,7 +16,7 @@ export default function Customer() {
 	// const [allData, setAllData] = useState<any>([]);
 
 	// const getList = async () => {
-	// 	const { data } = await getPatents();
+	// 	const { data } = await getTrademark();
 	// 	if (Array.isArray(data)) {
 	// 		setList(data || []);
 	// 		// setAllData(data || []);
@@ -34,7 +34,7 @@ export default function Customer() {
 
 	const handleSearch = async () => {
 		// const { title, applyNum, state } = params;
-		const { data }: any = await getPatents({ select: params.select });
+		const { data }: any = await getTrademark({ select: params.select });
 		// if (data.length > 0 && (title || applyNum || state)) {
 		// const v = data.filter((item: any) => {
 		// 	if (title) {

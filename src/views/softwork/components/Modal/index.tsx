@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Row, Col, message, DatePicker } from "antd";
 import { useEffect } from "react";
-import { addPatents, updatePatents } from "@/api/modules/login";
+import { addSoftwork, updateSoftwork } from "@/api/modules/login";
 import moment from "moment";
 // const { Option } = Select;
 
@@ -9,34 +9,32 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 
 	useEffect(() => {
 		if (modalVisible && record) {
-			const { annualFeeEndDate, applyDate, openDate, endDate } = record;
+			const { devEndDate, releaseDate, registDate } = record;
 			form.setFieldsValue({
 				...record,
-				annualFeeEndDate: annualFeeEndDate ? moment(annualFeeEndDate, "YYYY-MM-DD") : "",
-				applyDate: applyDate ? moment(applyDate, "YYYY-MM-DD") : "",
-				openDate: openDate ? moment(openDate, "YYYY-MM-DD") : "",
-				endDate: endDate ? moment(endDate, "YYYY-MM-DD") : ""
+				devEndDate: devEndDate ? moment(devEndDate, "YYYY-MM-DD") : "",
+				releaseDate: releaseDate ? moment(releaseDate, "YYYY-MM-DD") : "",
+				registDate: registDate ? moment(registDate, "YYYY-MM-DD") : ""
 			});
 		}
 	}, [record, modalVisible]);
 
 	const handleOk = async () => {
 		const value = form.getFieldsValue();
-		console.log(value, "ddd");
+		let res: any;
 		!record
-			? await addPatents(value)
-			: await updatePatents({
+			? (res = await addSoftwork(value))
+			: (res = await updateSoftwork({
 					...record,
 					...value,
-					annualFeeEndDate: value.annualFeeEndDate ? value.annualFeeEndDate.format("YYYY-MM-DD") : "",
-					applyDate: value.applyDate ? value.applyDate.format("YYYY-MM-DD") : "",
-					openDate: value.openDate ? value.openDate.format("YYYY-MM-DD") : "",
-					endDate: value.endDate ? value.endDate.format("YYYY-MM-DD") : ""
-			  });
+					devEndDate: value.devEndDate ? value.devEndDate.format("YYYY-MM-DD") : "",
+					releaseDate: value.releaseDate ? value.releaseDate.format("YYYY-MM-DD") : "",
+					registDate: value.registDate ? value.registDate.format("YYYY-MM-DD") : ""
+			  }));
 		setModalVisible(false);
 		form.resetFields();
 		await handleSearch();
-		message.success("操作成功");
+		res.success ? message.success("操作成功") : message.error("操作失败");
 	};
 
 	const handleCancel = () => {
@@ -45,37 +43,20 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	const fields = [
-		{ name: "title", label: "标题", element: <Input /> },
+		{ name: "company", label: "公司", element: <Input /> },
 		{
-			name: "annualFeeEndDate",
-			label: "年费截至日期",
-			element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} />
+			name: "nameAll",
+			label: "软件全称",
+			element: <Input />
 		},
-		{ name: "applyNum", label: "申请号", element: <Input /> },
-		{ name: "state", label: "法律状态/事件", element: <Input /> },
-		{ name: "applyUser", label: "申请人", element: <Input /> },
-		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "openDate", label: "公开日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "type", label: "专利类型", element: <Input /> },
+		{ name: "nameSimple", label: "软件简称", element: <Input /> },
+		{ name: "version", label: "版本号", element: <Input /> },
+		{ name: "registNum", label: "登记号", element: <Input /> },
+		{ name: "devEndDate", label: "开发完成日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "releaseDate", label: "首次发布日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "registDate", label: "登记日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
 
-		{ name: "annualFee", label: "年费", element: <Input /> },
-
-		{ name: "endDate", label: "专利终止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> }
-
-		// {
-		// 	name: "customerType",
-		// 	label: "客户类别",
-		// 	element: (
-		// 		<Select style={{ width: "100%" }}>
-		// 			<Option value={1}>已合作</Option>
-		// 			<Option value={2}>已签订合同</Option>
-		// 			<Option value={3}>有合作意向</Option>
-		// 			<Option value={4}>需要继续跟进</Option>
-		// 			<Option value={5}>跟进难度较大</Option>
-		// 			<Option value={6}>无意向</Option>
-		// 		</Select>
-		// 	)
-		// }
+		{ name: "ways", label: "权力取得方式", element: <Input /> }
 	];
 
 	const getFields = () => {
