@@ -24,6 +24,10 @@ const LoginForm = (props: any) => {
 			setLoading(true);
 			// loginForm.password = md5(loginForm.password);
 			const { data } = await loginApi(loginForm);
+			if (!data) {
+				message.error("登录失败！");
+				return;
+			}
 			setToken(data?.tokenValue);
 			setTabsList([]);
 			message.success("登录成功！");

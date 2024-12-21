@@ -44,3 +44,37 @@ export const deletePatents = (p: any) => {
 export const uploadPatents = (p: any) => {
 	return http.post<any[]>(PORT1 + `/patentDO/uploadPatentFile`, p);
 };
+
+// 商标
+export const getTrademark = (params: any) => {
+	return http.get<any[]>(PORT1 + `/trademarkDO/get`, params);
+};
+
+export const addTrademark = (p: any) => {
+	return http.post<any[]>(PORT1 + `/trademarkDO/add`, p);
+};
+
+export const updateTrademark = (p: any) => {
+	return http.put<any[]>(PORT1 + `/trademarkDO/edit`, p);
+};
+
+export const deleteTrademark = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/trademarkDO/delete`, p);
+};
+
+// 软著
+export const getSoftwork = (params: any) => {
+	return http.get<any[]>(PORT1 + `/softworkDO/get`, params);
+};
+
+export const addSoftwork = (p: any) => {
+	return http.post<any[]>(PORT1 + `/softworkDO/add`, p);
+};
+
+export const updateSoftwork = (p: any) => {
+	return http.put<any[]>(PORT1 + `/softworkDO/edit`, p);
+};
+
+export const deleteSoftwork = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/softworkDO/delete`, p);
+};

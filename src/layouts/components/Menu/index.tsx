@@ -75,8 +75,18 @@ const LayoutMenu = (props: any) => {
 			const data = [
 				{
 					icon: "HomeOutlined",
-					title: "专利",
+					title: "专利管理",
 					path: "/home/index"
+				},
+				{
+					icon: "AreaChartOutlined",
+					title: "商标管理",
+					path: "/trademark/index"
+				},
+				{
+					icon: "TableOutlined",
+					title: "软著管理",
+					path: "/softwork/index"
 				}
 				// {
 				// 	icon: "AreaChartOutlined",
