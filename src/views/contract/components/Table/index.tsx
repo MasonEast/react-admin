@@ -84,7 +84,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	return (
 		<Card>
 			<div className={styles.card_header}>
-				<span className={styles.card_header_title}>专利列表</span>
+				<span className={styles.card_header_title}>合同列表</span>
 				<Button className={styles.card_header_button} type="primary" onClick={handleAdd}>
 					新增
 				</Button>

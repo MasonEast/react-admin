@@ -1,6 +1,6 @@
-import { Modal, Form, Input, Row, Col, message, DatePicker } from "antd";
+import { Modal, Form, Input, Row, Col, message } from "antd";
 import { useEffect } from "react";
-import { addPatents, updatePatents } from "@/api/modules/login";
+import { addAccount, updateAccount } from "@/api/modules/login";
 import moment from "moment";
 // const { Option } = Select;
 
@@ -24,8 +24,8 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 		const value = form.getFieldsValue();
 		console.log(value, "ddd");
 		!record
-			? await addPatents(value)
-			: await updatePatents({
+			? await addAccount(value)
+			: await updateAccount({
 					...record,
 					...value,
 					annualFeeEndDate: value.annualFeeEndDate ? value.annualFeeEndDate.format("YYYY-MM-DD") : "",
@@ -45,37 +45,14 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	const fields = [
-		{ name: "title", label: "标题", element: <Input /> },
-		{
-			name: "annualFeeEndDate",
-			label: "年费截至日期",
-			element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} />
-		},
-		{ name: "applyNum", label: "申请号", element: <Input /> },
-		{ name: "state", label: "法律状态/事件", element: <Input /> },
-		{ name: "applyUser", label: "申请人", element: <Input /> },
-		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "openDate", label: "公开日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "type", label: "专利类型", element: <Input /> },
-
-		{ name: "annualFee", label: "年费", element: <Input /> },
-
-		{ name: "endDate", label: "专利终止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> }
-
-		// {
-		// 	name: "customerType",
-		// 	label: "客户类别",
-		// 	element: (
-		// 		<Select style={{ width: "100%" }}>
-		// 			<Option value={1}>已合作</Option>
-		// 			<Option value={2}>已签订合同</Option>
-		// 			<Option value={3}>有合作意向</Option>
-		// 			<Option value={4}>需要继续跟进</Option>
-		// 			<Option value={5}>跟进难度较大</Option>
-		// 			<Option value={6}>无意向</Option>
-		// 		</Select>
-		// 	)
-		// }
+		{ name: "topicName", label: "主题名称", element: <Input /> },
+		{ name: "account", label: "账号", element: <Input /> },
+		{ name: "password", label: "密码", element: <Input /> },
+		{ name: "email", label: "注册邮箱", element: <Input /> },
+		{ name: "phone", label: "注册手机号码", element: <Input /> },
+		{ name: "website", label: "网址", element: <Input /> },
+		{ name: "companyName", label: "公司名称", element: <Input /> },
+		{ name: "registrant", label: "注册人", element: <Input /> }
 	];
 
 	const getFields = () => {

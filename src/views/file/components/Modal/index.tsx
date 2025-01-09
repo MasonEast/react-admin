@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Row, Col, message, DatePicker } from "antd";
 import { useEffect } from "react";
-import { addPatents, updatePatents } from "@/api/modules/login";
+import { addFile, updateFile } from "@/api/modules/login";
 import moment from "moment";
 // const { Option } = Select;
 
@@ -9,13 +9,10 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 
 	useEffect(() => {
 		if (modalVisible && record) {
-			const { annualFeeEndDate, applyDate, openDate, endDate } = record;
+			const { releaseDate } = record;
 			form.setFieldsValue({
 				...record,
-				annualFeeEndDate: annualFeeEndDate ? moment(annualFeeEndDate, "YYYY-MM-DD") : "",
-				applyDate: applyDate ? moment(applyDate, "YYYY-MM-DD") : "",
-				openDate: openDate ? moment(openDate, "YYYY-MM-DD") : "",
-				endDate: endDate ? moment(endDate, "YYYY-MM-DD") : ""
+				releaseDate: releaseDate ? moment(releaseDate, "YYYY-MM-DD") : ""
 			});
 		}
 	}, [record, modalVisible]);
@@ -24,14 +21,11 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 		const value = form.getFieldsValue();
 		console.log(value, "ddd");
 		!record
-			? await addPatents(value)
-			: await updatePatents({
+			? await addFile(value)
+			: await updateFile({
 					...record,
 					...value,
-					annualFeeEndDate: value.annualFeeEndDate ? value.annualFeeEndDate.format("YYYY-MM-DD") : "",
-					applyDate: value.applyDate ? value.applyDate.format("YYYY-MM-DD") : "",
-					openDate: value.openDate ? value.openDate.format("YYYY-MM-DD") : "",
-					endDate: value.endDate ? value.endDate.format("YYYY-MM-DD") : ""
+					releaseDate: value.releaseDate ? value.releaseDate.format("YYYY-MM-DD") : ""
 			  });
 		setModalVisible(false);
 		form.resetFields();
@@ -45,37 +39,12 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	const fields = [
-		{ name: "title", label: "标题", element: <Input /> },
-		{
-			name: "annualFeeEndDate",
-			label: "年费截至日期",
-			element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} />
-		},
-		{ name: "applyNum", label: "申请号", element: <Input /> },
-		{ name: "state", label: "法律状态/事件", element: <Input /> },
-		{ name: "applyUser", label: "申请人", element: <Input /> },
-		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "openDate", label: "公开日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "type", label: "专利类型", element: <Input /> },
+		{ name: "fileName", label: "文件名称", element: <Input /> },
 
-		{ name: "annualFee", label: "年费", element: <Input /> },
-
-		{ name: "endDate", label: "专利终止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> }
-
-		// {
-		// 	name: "customerType",
-		// 	label: "客户类别",
-		// 	element: (
-		// 		<Select style={{ width: "100%" }}>
-		// 			<Option value={1}>已合作</Option>
-		// 			<Option value={2}>已签订合同</Option>
-		// 			<Option value={3}>有合作意向</Option>
-		// 			<Option value={4}>需要继续跟进</Option>
-		// 			<Option value={5}>跟进难度较大</Option>
-		// 			<Option value={6}>无意向</Option>
-		// 		</Select>
-		// 	)
-		// }
+		{ name: "releaseDate", label: "文件发布日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
+		{ name: "company", label: "发布公司", element: <Input /> },
+		{ name: "department", label: "发布部门", element: <Input /> },
+		{ name: "recipientDept", label: "收件部门", element: <Input /> }
 	];
 
 	const getFields = () => {
