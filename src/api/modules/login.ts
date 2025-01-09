@@ -78,3 +78,75 @@ export const updateSoftwork = (p: any) => {
 export const deleteSoftwork = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/softworkDO/delete`, p);
 };
+
+// 合同
+
+export const getContract = (params: any) => {
+	return http.get<any[]>(PORT1 + `/contractDO/get`, params);
+};
+
+export const addContract = (p: any) => {
+	return http.post<any[]>(PORT1 + `/contractDO/add`, p);
+};
+
+export const updateContract = (p: any) => {
+	return http.put<any[]>(PORT1 + `/contractDO/edit`, p);
+};
+
+export const deleteContract = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/contractDO/delete`, p);
+};
+
+// 账户
+
+export const getAccount = (params: any) => {
+	return http.get<any[]>(PORT1 + `/accountDO/get`, params);
+};
+
+export const addAccount = (p: any) => {
+	return http.post<any[]>(PORT1 + `/accountDO/add`, p);
+};
+
+export const updateAccount = (p: any) => {
+	return http.put<any[]>(PORT1 + `/accountDO/edit`, p);
+};
+
+export const deleteAccount = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/accountDO/delete`, p);
+};
+
+// 营业执照
+
+export const getLicense = (params: any) => {
+	return http.get<any[]>(PORT1 + `/businessLicenseDO/get`, params);
+};
+
+export const addLicense = (p: any) => {
+	return http.post<any[]>(PORT1 + `/businessLicenseDO/add`, p);
+};
+
+export const updateLicense = (p: any) => {
+	return http.put<any[]>(PORT1 + `/businessLicenseDO/edit`, p);
+};
+
+export const deleteLicense = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/businessLicenseDO/delete`, p);
+};
+
+// 文件
+
+export const getFile = (params: any) => {
+	return http.get<any[]>(PORT1 + `/officialDocumentsDO/get`, params);
+};
+
+export const addFile = (p: any) => {
+	return http.post<any[]>(PORT1 + `/officialDocumentsDO/add`, p);
+};
+
+export const updateFile = (p: any) => {
+	return http.put<any[]>(PORT1 + `/officialDocumentsDO/edit`, p);
+};
+
+export const deleteFile = (p: any) => {
+	return http.delete<any[]>(PORT1 + `/officialDocumentsDO/delete`, p);
+};
