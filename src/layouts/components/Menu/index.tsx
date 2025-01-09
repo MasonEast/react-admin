@@ -87,6 +87,26 @@ const LayoutMenu = (props: any) => {
 					icon: "TableOutlined",
 					title: "软著管理",
 					path: "/softwork/index"
+				},
+				{
+					icon: "FileSearchOutlined",
+					title: "合同管理",
+					path: "/contract/index"
+				},
+				{
+					icon: "ReadOutlined",
+					title: "营业执照管理",
+					path: "/license/index"
+				},
+				{
+					icon: "ProfileOutlined",
+					title: "文件管理",
+					path: "/file/index"
+				},
+				{
+					icon: "TeamOutlined",
+					title: "账户管理",
+					path: "/account/index"
 				}
 				// {
 				// 	icon: "AreaChartOutlined",
