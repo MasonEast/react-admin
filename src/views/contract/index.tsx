@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPatents } from "@/api/modules/login";
+import { getContract } from "@/api/modules/login";
 
 import Search from "./components/Search";
 import Table from "./components/Table";
@@ -19,7 +19,7 @@ export default function Customer() {
 	}, [params]);
 
 	const handleSearch = async () => {
-		const { data }: any = await getPatents({ select: params.select });
+		const { data }: any = await getContract({ select: params.select });
 
 		setList(data);
 		setTotal(data.length);

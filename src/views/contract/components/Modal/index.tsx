@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Row, Col, message, DatePicker } from "antd";
 import { useEffect } from "react";
-import { addPatents, updatePatents } from "@/api/modules/login";
+import { addContract, updateContract } from "@/api/modules/login";
 import moment from "moment";
 // const { Option } = Select;
 
@@ -9,13 +9,10 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 
 	useEffect(() => {
 		if (modalVisible && record) {
-			const { annualFeeEndDate, applyDate, openDate, endDate } = record;
+			const { signDate } = record;
 			form.setFieldsValue({
 				...record,
-				annualFeeEndDate: annualFeeEndDate ? moment(annualFeeEndDate, "YYYY-MM-DD") : "",
-				applyDate: applyDate ? moment(applyDate, "YYYY-MM-DD") : "",
-				openDate: openDate ? moment(openDate, "YYYY-MM-DD") : "",
-				endDate: endDate ? moment(endDate, "YYYY-MM-DD") : ""
+				signDate: signDate ? moment(signDate, "YYYY-MM-DD") : ""
 			});
 		}
 	}, [record, modalVisible]);
@@ -24,14 +21,11 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 		const value = form.getFieldsValue();
 		console.log(value, "ddd");
 		!record
-			? await addPatents(value)
-			: await updatePatents({
+			? await addContract(value)
+			: await updateContract({
 					...record,
 					...value,
-					annualFeeEndDate: value.annualFeeEndDate ? value.annualFeeEndDate.format("YYYY-MM-DD") : "",
-					applyDate: value.applyDate ? value.applyDate.format("YYYY-MM-DD") : "",
-					openDate: value.openDate ? value.openDate.format("YYYY-MM-DD") : "",
-					endDate: value.endDate ? value.endDate.format("YYYY-MM-DD") : ""
+					signDate: value.signDate ? value.signDate.format("YYYY-MM-DD") : ""
 			  });
 		setModalVisible(false);
 		form.resetFields();
@@ -45,45 +39,29 @@ export default function AddModal({ modalVisible, setModalVisible, handleSearch, 
 	};
 
 	const fields = [
-		{ name: "title", label: "标题", element: <Input /> },
+		{ name: "name", label: "合同名称", element: <Input /> },
 		{
-			name: "annualFeeEndDate",
-			label: "年费截至日期",
-			element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} />
+			name: "contractType",
+			label: "合同类型",
+			element: <Input />
 		},
-		{ name: "applyNum", label: "申请号", element: <Input /> },
-		{ name: "state", label: "法律状态/事件", element: <Input /> },
-		{ name: "applyUser", label: "申请人", element: <Input /> },
-		{ name: "applyDate", label: "申请日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "openDate", label: "公开日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
-		{ name: "type", label: "专利类型", element: <Input /> },
+		{ name: "contractNo", label: "合同编号", element: <Input /> },
 
-		{ name: "annualFee", label: "年费", element: <Input /> },
+		{ name: "partyA", label: "甲方公司名称", element: <Input /> },
+		{ name: "partyB", label: "乙方公司名称", element: <Input /> },
+		{ name: "amount", label: "合同款项", element: <Input /> },
+		{ name: "signDate", label: "签约时间", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> },
 
-		{ name: "endDate", label: "专利终止日期", element: <DatePicker style={{ width: "290px" }} format={"YYYY-MM-DD"} /> }
-
-		// {
-		// 	name: "customerType",
-		// 	label: "客户类别",
-		// 	element: (
-		// 		<Select style={{ width: "100%" }}>
-		// 			<Option value={1}>已合作</Option>
-		// 			<Option value={2}>已签订合同</Option>
-		// 			<Option value={3}>有合作意向</Option>
-		// 			<Option value={4}>需要继续跟进</Option>
-		// 			<Option value={5}>跟进难度较大</Option>
-		// 			<Option value={6}>无意向</Option>
-		// 		</Select>
-		// 	)
-		// }
+		{ name: "signer", label: "签约人", element: <Input /> },
+		{ name: "content", label: "合同内容", element: <Input.TextArea rows={5} />, span: 18, labelCol: { span: 3 } }
 	];
 
 	const getFields = () => {
 		const children: any = [];
 		fields.forEach(item => {
 			children.push(
-				<Col style={{ margin: "0 15px" }} span={7} key={item.label}>
-					<Form.Item name={item.name} label={item.label}>
+				<Col style={{ margin: "0 15px" }} span={item.span || 7} key={item.label}>
+					<Form.Item name={item.name} label={item.label} labelCol={item.labelCol || undefined}>
 						{item.element}
 					</Form.Item>
 				</Col>
