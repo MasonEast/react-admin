@@ -55,7 +55,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 		{
 			dataIndex: "annualFeeEndDate",
 			title: "年费截至日期",
-			render: text => <span style={{ color: isWithin30Days(text) ? "red" : "green" }}>{text}</span> // 年龄大于40的显示为红色，否则为绿色
+			render: text => <span style={{ color: isWithin30Days(text) ? "red" : "green" }}>{text}</span>
 		},
 		{ dataIndex: "applyNum", title: "申请号" },
 		{ dataIndex: "state", title: "法律状态/事件" },
@@ -126,7 +126,8 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 			<Table
 				style={{ marginTop: "20px" }}
 				scroll={{
-					x: 2200
+					x: 2200,
+					y: 500
 				}}
 				loading={loading}
 				rowKey="basic-table"

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deleteTrademark } from "@/api/modules/login";
 import AddModal from "../Modal";
 import Upload from "@/components/Upload";
+import { isWithin30Days } from "@/utils/util";
 
 import styles from "./index.module.less";
 
@@ -51,7 +52,11 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 
 	const columns: ColumnProps<any>[] = [
 		{ dataIndex: "applyUser", title: "申请人" },
-
+		{
+			dataIndex: "expiryDate",
+			title: "截止日期",
+			render: text => <span style={{ color: isWithin30Days(text) ? "red" : "green" }}>{text}</span>
+		},
 		{ dataIndex: "type", title: "类别" },
 		{ dataIndex: "registNum", title: "注册号" },
 		{ dataIndex: "status", title: "商标状态" },
@@ -62,7 +67,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 		{ dataIndex: "objectionExpiryDate", title: "异议截止日" },
 
 		{ dataIndex: "registDate", title: "注册日期" },
-		{ dataIndex: "expiryDate", title: "截止日期" },
+
 		{ dataIndex: "thing", title: "核定商品/服务" },
 		{ dataIndex: "thingGroup", title: "核定商品/服务组别" },
 		{ dataIndex: "invalidThing", title: "无效商品/服务" },
@@ -108,7 +113,8 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 			<Table
 				style={{ marginTop: "20px" }}
 				scroll={{
-					x: 2200
+					x: 2200,
+					y: 500
 				}}
 				loading={loading}
 				rowKey="basic-table"

@@ -92,7 +92,8 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 			<Table
 				style={{ marginTop: "20px" }}
 				scroll={{
-					x: 2200
+					x: 2200,
+					y: 500
 				}}
 				loading={loading}
 				rowKey="basic-table"
