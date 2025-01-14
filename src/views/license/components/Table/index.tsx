@@ -3,6 +3,7 @@ import { ColumnProps } from "antd/lib/table";
 import { useState } from "react";
 import { deleteLicense } from "@/api/modules/login";
 import AddModal from "../Modal";
+import Upload from "@/components/Upload";
 
 import styles from "./index.module.less";
 
@@ -75,6 +76,12 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 						<Popconfirm title={`你确定要删除吗？`} onConfirm={() => handleDelete(record)} okText="确定" cancelText="取消">
 							<span className="global_table_button">删除</span>
 						</Popconfirm>
+						<Upload uploadUrl="/businessLicenseDO/upload" id={record.id} showUploadList={false} refresh={handleSearch} />
+						{record.filePath && (
+							<span onClick={() => window.open(record.filePath, "_blank")} className="global_table_button">
+								下载
+							</span>
+						)}
 					</>
 				);
 			}

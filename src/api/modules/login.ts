@@ -62,6 +62,10 @@ export const deleteTrademark = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/trademarkDO/delete`, p);
 };
 
+export const uploadTrademark = (p: any) => {
+	return http.post<any[]>(PORT1 + `/trademarkDO/upload`, p);
+};
+
 // 软著
 export const getSoftwork = (params: any) => {
 	return http.get<any[]>(PORT1 + `/softworkDO/get`, params);
@@ -77,6 +81,10 @@ export const updateSoftwork = (p: any) => {
 
 export const deleteSoftwork = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/softworkDO/delete`, p);
+};
+
+export const uploadSoftwork = (p: any) => {
+	return http.post<any[]>(PORT1 + `/softworkDO/upload`, p);
 };
 
 // 合同
@@ -95,6 +103,10 @@ export const updateContract = (p: any) => {
 
 export const deleteContract = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/contractDO/delete`, p);
+};
+
+export const uploadContract = (p: any) => {
+	return http.post<any[]>(PORT1 + `/contractDO/upload`, p);
 };
 
 // 账户
@@ -133,6 +145,10 @@ export const deleteLicense = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/businessLicenseDO/delete`, p);
 };
 
+export const uploadLicense = (p: any) => {
+	return http.post<any[]>(PORT1 + `/businessLicenseDO/upload`, p);
+};
+
 // 文件
 
 export const getFile = (params: any) => {
@@ -149,4 +165,8 @@ export const updateFile = (p: any) => {
 
 export const deleteFile = (p: any) => {
 	return http.delete<any[]>(PORT1 + `/officialDocumentsDO/delete`, p);
+};
+
+export const uploadFile = (p: any) => {
+	return http.post<any[]>(PORT1 + `/officialDocumentsDO/upload`, p);
 };

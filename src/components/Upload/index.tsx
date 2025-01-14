@@ -5,7 +5,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import http from "@/api";
 import { PORT1 } from "@/api/config/servicePort";
 
-const CustomUpload = ({ uploadUrl, id, showUploadList }: any) => {
+const CustomUpload = ({ uploadUrl, id, showUploadList, refresh }: any) => {
 	// 处理自定义请求的方法
 	const handleUpload: any = async ({ file, onSuccess, onError, onProgress }: any) => {
 		const formData = new FormData();
@@ -26,6 +26,7 @@ const CustomUpload = ({ uploadUrl, id, showUploadList }: any) => {
 
 			onSuccess(response.data);
 			message.success(`${file.name} 上传成功`);
+			refresh && refresh();
 		} catch (error) {
 			onError(error);
 			message.error(`${file.name} 上传失败`);
