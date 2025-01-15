@@ -51,7 +51,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	};
 
 	const columns: ColumnProps<any>[] = [
-		{ dataIndex: "title", title: "标题" },
+		{ dataIndex: "title", title: "标题", width: 300 },
 		{
 			dataIndex: "annualFeeEndDate",
 			title: "年费截至日期",

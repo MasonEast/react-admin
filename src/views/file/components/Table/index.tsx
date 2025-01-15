@@ -46,7 +46,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	};
 
 	const columns: ColumnProps<any>[] = [
-		{ dataIndex: "fileName", title: "文件名称" },
+		{ dataIndex: "fileName", title: "文件名称", width: 300 },
 
 		{ dataIndex: "releaseDate", title: "文件发布日期" },
 		{ dataIndex: "company", title: "发布公司" },

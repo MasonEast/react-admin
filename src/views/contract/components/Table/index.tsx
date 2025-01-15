@@ -46,7 +46,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	};
 
 	const columns: ColumnProps<any>[] = [
-		{ dataIndex: "name", title: "合同名称" },
+		{ dataIndex: "name", title: "合同名称", width: 300 },
 		{
 			dataIndex: "contractType",
 			title: "合同类型"

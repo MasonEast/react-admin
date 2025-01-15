@@ -51,10 +51,11 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	// };
 
 	const columns: ColumnProps<any>[] = [
-		{ dataIndex: "applyUser", title: "申请人" },
+		{ dataIndex: "applyUser", title: "申请人", width: 300 },
 		{
 			dataIndex: "expiryDate",
 			title: "截止日期",
+			width: 150,
 			render: text => <span style={{ color: isWithin30Days(text) ? "red" : "green" }}>{text}</span>
 		},
 		{ dataIndex: "type", title: "类别" },

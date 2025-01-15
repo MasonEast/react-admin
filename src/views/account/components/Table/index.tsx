@@ -45,7 +45,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	};
 
 	const columns: ColumnProps<any>[] = [
-		{ dataIndex: "topicName", title: "主题名称" },
+		{ dataIndex: "topicName", title: "主题名称", width: 300 },
 		{ dataIndex: "account", title: "账号" },
 		{ dataIndex: "password", title: "密码" },
 		{ dataIndex: "email", title: "注册邮箱" },

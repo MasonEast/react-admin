@@ -45,7 +45,7 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 	};
 
 	const columns: ColumnProps<any>[] = [
-		{ dataIndex: "companyName", title: "公司名称" },
+		{ dataIndex: "companyName", title: "公司名称", width: 300 },
 		{ dataIndex: "creditCode", title: "统一社会信用代码" },
 		{ dataIndex: "legalRepresentative", title: "法定代表人" },
 		{ dataIndex: "registeredAddress", title: "注册地址" },
