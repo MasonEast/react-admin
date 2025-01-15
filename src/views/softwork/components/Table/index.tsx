@@ -49,7 +49,8 @@ const ATable = ({ handleSearch, params, setParams, list = [], total, loading }: 
 		{ dataIndex: "company", title: "公司", width: 300 },
 		{
 			dataIndex: "nameAll",
-			title: "软件全称"
+			title: "软件全称",
+			width: 300
 		},
 		{ dataIndex: "nameSimple", title: "软件简称" },
 		{ dataIndex: "version", title: "版本号" },
