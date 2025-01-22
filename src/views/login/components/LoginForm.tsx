@@ -29,6 +29,7 @@ const LoginForm = (props: any) => {
 				return;
 			}
 			setToken(data?.tokenValue);
+			localStorage.setItem("token", data?.tokenValue);
 			setTabsList([]);
 			message.success("登录成功！");
 			navigate(HOME_URL);

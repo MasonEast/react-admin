@@ -44,11 +44,11 @@ const AvatarIcon = (props: any) => {
 					label: <span className="dropdown-item">首页</span>,
 					onClick: () => navigate(HOME_URL)
 				},
-				{
-					key: "2",
-					label: <span className="dropdown-item">个人信息</span>,
-					onClick: () => infoRef.current!.showModal({ name: 11 })
-				},
+				// {
+				// 	key: "2",
+				// 	label: <span className="dropdown-item">个人信息</span>,
+				// 	onClick: () => infoRef.current!.showModal({ name: 11 })
+				// },
 				{
 					key: "3",
 					label: <span className="dropdown-item">修改密码</span>,
